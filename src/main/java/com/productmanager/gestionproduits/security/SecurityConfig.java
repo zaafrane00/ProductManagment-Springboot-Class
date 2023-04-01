@@ -31,25 +31,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin()
-                .defaultSuccessUrl("/home");
-
-        http.logout()
-                .logoutSuccessUrl("/");
-
-        http.authorizeRequests()
-                .antMatchers("/","/index","/images/**")
-                .permitAll();
-
-        http.authorizeRequests()
-                .antMatchers("/delete/**","/addProduct","/save","/edit/**")
-                .hasAuthority("ADMIN");
+//        http.formLogin()
+//                .defaultSuccessUrl("/home");
+//
+//        http.logout()
+//                .logoutSuccessUrl("/");
+//
+//        http.authorizeRequests()
+//                .antMatchers("/","/index","/images/**")
+//                .permitAll();
+//
+//        http.authorizeRequests()
+//                .antMatchers("/delete/**","/addProduct","/save","/edit/**")
+//                .hasAuthority("ADMIN");
         //.hasRole("ADMIN");
 
-        http.authorizeRequests()
-                .anyRequest()
-                .authenticated();
+//        http.authorizeRequests()
+//                .anyRequest()
+//                .authenticated();
 
+        http.formLogin().disable();
+        http.csrf().disable();
     }
 
     @Bean

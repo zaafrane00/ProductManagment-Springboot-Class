@@ -16,4 +16,5 @@ public interface IServiceProduit {
     List <Product> getProduitByCat(Integer idcat);
     Product getProduit(Integer id);
     void deleteProduit (Integer id);
+    byte[] getImage(Integer id);
 }

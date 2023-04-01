@@ -24,7 +24,7 @@ public class ServiceProduit implements IServiceProduit{
     @Override
     public void saveProduit(Product p, MultipartFile mf) throws IOException {
         if(!mf.isEmpty())
-            p.setPhoto(saveImage(mf));
+            p.setPhoto(saveImage2(mf));
         pr.save(p);
     }
 
@@ -54,11 +54,36 @@ public class ServiceProduit implements IServiceProduit{
         pr.deleteById(id);
     }
 
+    @Override
+    public byte[] getImage(Integer id) {
+        try{
+            String path=System.getProperty("user.home") + "/images/";
+            Path p = Paths.get(path,getProduit(id).getPhoto());
+            return Files.readAllBytes(p);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+            return null;
+    }
+
     private String saveImage(MultipartFile mf) throws IOException {
         String nomFile = mf.getOriginalFilename();
-        String tab[] = nomFile.split("\\.");
+        String[] tab = nomFile.split("\\.");
         String newName = tab[0] + System.currentTimeMillis() + "." + tab[1];
         Path p = Paths.get(System.getProperty("user.dir") + "/src/main/resources/static/images/",newName);
+        Files.write(p,mf.getBytes());
+        return newName;
+    }
+
+    private String saveImage2(MultipartFile mf) throws IOException {
+        String nomFile = mf.getOriginalFilename();
+        String[] tab = nomFile!=null? nomFile.split("\\."): null;
+        String newName = tab[0] + System.currentTimeMillis() + "." + tab[1];
+        String path=System.getProperty("user.home") + "/images/";
+        if(Files.notExists(Paths.get(path))){
+            Files.createDirectories(Paths.get(path));
+        }
+        Path p = Paths.get(path,newName);
         Files.write(p,mf.getBytes());
         return newName;
     }
