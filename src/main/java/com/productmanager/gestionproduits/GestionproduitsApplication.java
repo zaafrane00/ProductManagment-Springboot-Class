@@ -49,35 +49,35 @@ public class GestionproduitsApplication  implements CommandLineRunner {
 //		productRepository.save(product3);
 
 
-		AppRole role1 = new AppRole();
-		AppRole role2 = new AppRole();
-
-		role1.setRole("USER");
-		role2.setRole("ADMIN");
-
-		ArrayList<AppRole> roles1 = new ArrayList<>();
-		roles1.add(role1);
-
-		ArrayList<AppRole> roles2 = new ArrayList<>();
-		roles2.add(role2);
-
-
-
-		AppUser user1 = new AppUser();
-		AppUser user2 = new AppUser();
-
-		user1.setUserName("user1");
-		user1.setPassword(passwordEncoder.encode("user1"));
-		user1.setRoles(roles1);
-
-		user2.setUserName("admin");
-		user2.setPassword(passwordEncoder.encode("admin"));
-		user2.setRoles(roles2);
-
-		userRepository.save(user1);
-		userRepository.save(user2);
-		roleRepository.save(role1);
-		roleRepository.save(role2);
+//		AppRole role1 = new AppRole();
+//		AppRole role2 = new AppRole();
+//
+//		role1.setRole("USER");
+//		role2.setRole("ADMIN");
+//
+//		ArrayList<AppRole> roles1 = new ArrayList<>();
+//		roles1.add(role1);
+//
+//		ArrayList<AppRole> roles2 = new ArrayList<>();
+//		roles2.add(role2);
+//
+//
+//
+//		AppUser user1 = new AppUser();
+//		AppUser user2 = new AppUser();
+//
+//		user1.setUserName("user1");
+//		user1.setPassword(passwordEncoder.encode("user1"));
+//		user1.setRoles(roles1);
+//
+//		user2.setUserName("admin");
+//		user2.setPassword(passwordEncoder.encode("admin"));
+//		user2.setRoles(roles2);
+//
+//		userRepository.save(user1);
+//		userRepository.save(user2);
+//		roleRepository.save(role1);
+//		roleRepository.save(role2);
 
 
 	}

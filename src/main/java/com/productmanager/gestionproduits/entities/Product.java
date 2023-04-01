@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -18,4 +19,8 @@ public class Product {
     @ManyToOne
     private Category cat;
     private String photo;
+    @ManyToMany(mappedBy = "products",cascade = CascadeType.PERSIST)
+    private List<Fournisseur> fournisseurs;
+
+
 }
