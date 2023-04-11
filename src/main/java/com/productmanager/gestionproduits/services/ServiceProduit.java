@@ -5,6 +5,8 @@ import com.productmanager.gestionproduits.entities.Product;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +22,7 @@ import java.util.List;
 public class ServiceProduit implements IServiceProduit{
 
     private final ProductRepository pr;
+    private JavaMailSender mailSender;
 
     @Override
     public void saveProduit(Product p, MultipartFile mf) throws IOException {
@@ -30,17 +33,20 @@ public class ServiceProduit implements IServiceProduit{
 
     @Override
     public List<Product> getAllProduit() {
+        sendEmail("zaafranehamza@gmail.com","subject","body");
         return pr.findAll();
     }
 
     @Override
     public Page<Product> getProduitBMC(String mc, Pageable p) {
+        sendEmail("zaafranehamza@gmail.com","subject","body");
         return pr.findByNomContains(mc,p);
     }
 
 
     @Override
     public List<Product> getProduitByCat(Integer idcat) {
+      //  sendEmail("zaafranehamza@gmail.com","subject","body");
         return pr.getProductByCat(idcat);
     }
 
@@ -86,5 +92,13 @@ public class ServiceProduit implements IServiceProduit{
         Path p = Paths.get(path,newName);
         Files.write(p,mf.getBytes());
         return newName;
+    }
+
+    public void sendEmail(String to, String subject, String body) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(body);
+        mailSender.send(message);
     }
 }
